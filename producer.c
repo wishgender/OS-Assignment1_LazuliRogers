@@ -1,7 +1,7 @@
 //= laz r
 //= 10-16-2025 13:16
 //= Operating Systems Fall 2025
-//= producer.cpp
+//= producer.c
 
 //= Dependencies =//
 #include <stdio.h>
@@ -44,7 +44,8 @@ int main() {
 
     printf("[producer]: Production started.\n");
 
-    while(running) {
+    int iterations = 0;
+    while(running && (iterations < ITERATIONS)) {
         //= generate an item
         int item = genItem();
 
@@ -58,6 +59,7 @@ int main() {
         sem_post(mutex);
         sem_post(full);
         
+        iterations++;
         sleep(rand() % 2 + 1); //= simulate work time
     }
 
@@ -75,7 +77,7 @@ void handleQuit(int sig) {
     running = 0;
 }
 
-//= closes semaphoresand unlinks shared resources
+//= closes semaphores and unlinks shared resources
 void cleanup() {
     printf("\n[producer]: cleaning up...\n");
     //= unmap and close shared table

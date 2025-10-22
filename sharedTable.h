@@ -9,7 +9,7 @@
 
 #define TABLE_SIZE 2 //= table can only hold two items at once
 #define SHM_NAME "/shmTable"
-
+#define ITERATIONS 20 //= number of times the programs should run
 //= define table
 typedef struct {
     int buffer[TABLE_SIZE];

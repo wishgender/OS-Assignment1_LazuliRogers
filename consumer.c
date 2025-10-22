@@ -1,7 +1,7 @@
 //= Lazuli Rogers
 //= 10-16-2025 13:05
 //= Operating Systems Fall 2025
-//= consumer.cpp
+//= consumer.c
 
 //= Dependencies =//
 #include <stdio.h>
@@ -38,7 +38,8 @@ int main() {
 
     printf("[consumer]: Consumption started.\n");
     
-    while(running) {
+    int iterations = 0;
+    while(running && (iterations < ITERATIONS)) {
         sem_wait(full);
         sem_wait(mutex);
 
@@ -49,6 +50,7 @@ int main() {
         sem_post(mutex);
         sem_post(empty);
 
+        iterations++;
         sleep(rand() % 3 + 1);
     }
 
